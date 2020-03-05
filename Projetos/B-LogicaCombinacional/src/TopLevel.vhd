@@ -23,7 +23,7 @@ entity TopLevel is
 		SW       : in  std_logic_vector(9 downto 0);
 		LEDR     : out std_logic_vector(9 downto 0)
 	);
-end entity;
+end entity; 
 
 ----------------------------
 -- Implementacao do bloco --
@@ -38,6 +38,7 @@ architecture rtl of TopLevel is
 -- implementacao
 ---------------
 begin
-          
 
+	LEDR(0) <= SW(0);
+          
 end rtl;
