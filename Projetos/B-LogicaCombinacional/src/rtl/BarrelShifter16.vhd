@@ -12,6 +12,7 @@ end entity;
 architecture rtl of BarrelShifter16 is
 begin
 
+	
 
 end architecture;
 
