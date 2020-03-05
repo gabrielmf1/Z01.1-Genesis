@@ -12,4 +12,5 @@ architecture arch of Or16 is
 begin
 
 	q <= a or b;
+	
 end architecture;
