@@ -88,7 +88,3 @@ begin
         "1111000" when (SEG2="0111") else
         "0000000" when (SEG2="1000") else
         "0010000" when (SEG2="1001");
-		  
-		  
-
-end rtl;
