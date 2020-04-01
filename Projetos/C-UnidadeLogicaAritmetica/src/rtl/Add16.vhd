@@ -11,7 +11,8 @@ use IEEE.STD_LOGIC_1164.all;
 entity Add16 is
 	port(
 		a   :  in STD_LOGIC_VECTOR(15 downto 0);
-		b   :  in STD_LOGIC_VECTOR(15 downto 0);
+    b   :  in STD_LOGIC_VECTOR(15 downto 0);
+    carry   :  out STD_LOGIC;
 		q   : out STD_LOGIC_VECTOR(15 downto 0)
 	);
 end entity;
@@ -96,5 +97,7 @@ begin
   fulladder16: FullAdder port map (
     a(15), b(15), c(14), q(15), c(15)
   );
+
+  carry <= c(15);
 
 end architecture;
