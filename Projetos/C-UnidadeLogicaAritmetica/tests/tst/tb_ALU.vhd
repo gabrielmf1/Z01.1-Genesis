@@ -22,17 +22,18 @@ component ALU is
 			nx:    in STD_LOGIC;                     -- inverte a entrada x
 			zy:    in STD_LOGIC;                     -- zera a entrada y
 			ny:    in STD_LOGIC;                     -- inverte a entrada y
-			f:     in STD_LOGIC_VECTOR(1 downto 0);                     -- se 0 calcula x & y, senão x + y
+			f:     in STD_LOGIC_VECTOR(1 downto 0);  -- se 0 calcula x & y, senão x + y
 			no:    in STD_LOGIC;                     -- inverte o valor da saída
 			zr:    out STD_LOGIC;                    -- setado se saída igual a zero
-			ng:    out STD_LOGIC;                    -- setado se saída é negativa
+      ng:    out STD_LOGIC;                    -- setado se saída é negativa
+      carry: out STD_LOGIC;
 			saida: out STD_LOGIC_VECTOR(15 downto 0) -- saída de dados da ALU
 	);
 end component;
 
    signal  inX, inY : STD_LOGIC_VECTOR(15 downto 0);
    signal  inF : STD_LOGIC_VECTOR(1 downto 0);
-   signal  inZX, inNX, inZY, inNY, inNO, outZR, outNG : STD_LOGIC;
+   signal  inZX, inNX, inZY, inNY, inNO, outZR, outNG, carryout : STD_LOGIC;
    signal  outSaida : STD_LOGIC_VECTOR(15 downto 0);
 
 begin
@@ -48,6 +49,7 @@ begin
     no => inNo,
     zr => outZr,
     ng => outNg,
+    carry => carryout,
     saida => outsaida);
 
   main : process
@@ -168,23 +170,31 @@ begin
       wait for 200 ps;
       assert(outZR = '0' and outNG = '1' and outSaida= "1111111111111111")  report "Falha em teste: 19" severity error;
 
+
       -- Teste: 20
       inX <= "0101010101010101"; inY <= "1111111111111111";
       inZX <= '0'; inNX <= '0'; inZY <= '0'; inNY <= '0'; inF <= "10"; inNO <= '0';
       wait for 200 ps;
       assert(outZR = '0' and outNG = '1' and outSaida= "1010101010101010")  report "Falha em teste: 20" severity error;
-
-      -- Teste: 20
+    
+      -- Teste: 21
       inX <= "1010101010101010"; inY <= "1111111111111111";
       inZX <= '0'; inNX <= '0'; inZY <= '0'; inNY <= '0'; inF <= "10"; inNO <= '0';
       wait for 200 ps;
-      assert(outZR = '0' and outNG = '0' and outSaida= "0101010101010101")  report "Falha em teste: 20" severity error;
-
-      -- Teste: 20
-      inX <= "1111111111111111"; inY <= "1111111111111111";
-      inZX <= '0'; inNX <= '0'; inZY <= '0'; inNY <= '0'; inF <= "10"; inNO <= '0';
+      assert(outZR = '0' and outNG = '0' and outSaida= "0101010101010101")  report "Falha em teste: 21" severity error;
+      
+    
+      -- Teste: 22
+      inX <= "0000000000000001"; inY <= "1111111111111111";
+      inZX <= '0'; inNX <= '0'; inZY <= '0'; inNY <= '0'; inF <= "01"; inNO <= '0';
       wait for 200 ps;
-      assert(outZR = '1' and outNG = '0' and outSaida= "0000000000000000")  report "Falha em teste: 20" severity error;
+      assert(carryout = '1')  report "Falha em teste: 22" severity error;
+      
+      -- Teste: 23
+      inX <= "0000000000000000"; inY <= "1111111111111111";
+      inZX <= '0'; inNX <= '0'; inZY <= '0'; inNY <= '0'; inF <= "01"; inNO <= '0';
+      wait for 200 ps;
+      assert(carryout = '0')  report "Falha em teste: 23" severity error;
 
     test_runner_cleanup(runner); -- Simulacao acaba aqui
 
