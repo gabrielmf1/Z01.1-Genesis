@@ -11,8 +11,7 @@ use IEEE.STD_LOGIC_1164.all;
 entity Add16 is
 	port(
 		a   :  in STD_LOGIC_VECTOR(15 downto 0);
-    b   :  in STD_LOGIC_VECTOR(15 downto 0);
-    carry   :  out STD_LOGIC;
+		b   :  in STD_LOGIC_VECTOR(15 downto 0);
 		q   : out STD_LOGIC_VECTOR(15 downto 0)
 	);
 end entity;
@@ -21,7 +20,7 @@ architecture rtl of Add16 is
   -- Aqui declaramos sinais (fios auxiliares)
   -- e componentes (outros módulos) que serao
   -- utilizados nesse modulo.
-  signal c : STD_LOGIC_VECTOR(15 downto 0);
+  c : STD_LOGIC_VECTOR(15 downto 0);
   
 
 
@@ -97,7 +96,5 @@ begin
   fulladder16: FullAdder port map (
     a(15), b(15), c(14), q(15), c(15)
   );
-
-  carry <= c(15);
 
 end architecture;

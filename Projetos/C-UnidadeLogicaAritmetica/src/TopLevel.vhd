@@ -52,11 +52,40 @@ architecture rtl of TopLevel is
           );
     end component;
 
+	 
+  component ALU is
+	port (
+			x,y:   in STD_LOGIC_VECTOR(15 downto 0); -- entradas de dados da ALU
+			zx:    in STD_LOGIC;                     -- zera a entrada x
+			nx:    in STD_LOGIC;                     -- inverte a entrada x
+			zy:    in STD_LOGIC;                     -- zera a entrada y
+			ny:    in STD_LOGIC;                     -- inverte a entrada y
+			f:     in STD_LOGIC;                     -- se 0 calcula x & y, senão x + y
+			no:    in STD_LOGIC;                     -- inverte o valor da saída
+			zr:    out STD_LOGIC;                    -- setado se saída igual a zero
+			ng:    out STD_LOGIC;                    -- setado se saída é negativa
+			saida: out STD_LOGIC_VECTOR(15 downto 0) -- saída de dados da ALU
+	);
+    end component;
 ---------------
 -- implementacao
 ---------------
 begin
 
-  u1 : HalfAdder port map(a => SW(0), b=> SW(1), soma => LEDR(0), vaium => LEDR(1));
+ --- u1 : HalfAdder port map(a => SW(0), b=> SW(1), soma => LEDR(0), vaium => LEDR(1));
+	ula0: ALU port map (
+    x                  => x,
+    Y                  => y,
+    Zx                 => SW(0),
+    Nx                 => SW(1),
+    Zy                 => SW(2),
+    Ny                 => SW(3),
+    F                  => SW(4),
+    No                 => SW(5),
+    Zr                 => LEDR(8),
+    Ng                 => LEDR(9),
+    Saida(7 downto 0)  => LEDR(7 downto 0),
+    Saida(15 downto 8) => Open
+    );
 
 end rtl;
