@@ -26,6 +26,14 @@ architecture arch of Register8 is
 	end component;
 
 begin
-
+	
+	R0: BinaryDigit port map(clock=> clock,input=> input(0),load=> load,output=> output(0));
+	R1: BinaryDigit port map(clock=> clock,input=> input(1),load=> load,output=> output(1));
+	R2: BinaryDigit port map(clock=> clock,input=> input(2),load=> load,output=> output(2));
+	R3: BinaryDigit port map(clock=> clock,input=> input(3),load=> load,output=> output(3));
+	R4: BinaryDigit port map(clock=> clock,input=> input(4),load=> load,output=> output(4));
+	R5: BinaryDigit port map(clock=> clock,input=> input(5),load=> load,output=> output(5));
+	R6: BinaryDigit port map(clock=> clock,input=> input(6),load=> load,output=> output(6));
+ 	R7: BinaryDigit port map(clock=> clock,input=> input(7),load=> load,output=> output(7));
 
 end architecture;

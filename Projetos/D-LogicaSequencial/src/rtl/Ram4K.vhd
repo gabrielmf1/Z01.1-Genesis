@@ -60,5 +60,17 @@ architecture arch of Ram4K is
 
 begin
 
+	entrada: DMux8Way port map (load, address(11 downto 9), load0, load1, load2, load3, load4, load5, load6, load7);
+
+	out0: Ram512 port map (clock, input, load, address(8 downto 0), output0);
+	out1: Ram512 port map (clock, input, load, address(8 downto 0), output1);
+	out2: Ram512 port map (clock, input, load, address(8 downto 0), output2);
+	out3: Ram512 port map (clock, input, load, address(8 downto 0), output3);
+	out4: Ram512 port map (clock, input, load, address(8 downto 0), output4);
+	out5: Ram512 port map (clock, input, load, address(8 downto 0), output5);
+	out6: Ram512 port map (clock, input, load, address(8 downto 0), output6);
+	out7: Ram512 port map (clock, input, load, address(8 downto 0), output7);
+
+	saida: Mux8Way16 port map (output0, output1, output2, output3, output4, output5, output6, output7, address(11 downto 9), output);
 
 end architecture;
