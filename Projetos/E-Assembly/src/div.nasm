@@ -1,13 +1,44 @@
-; Arquivo: Div.nasm
-; Curso: Elementos de Sistemas
-; Criado por: Luciano Soares
-; Data: 27/03/2017
-
-; Divide R0 por R1 e armazena o resultado em R2.
-; (R0, R1, R2 refer to RAM[0], RAM[1], and RAM[2], respectively.)
-; divisao para numeros inteiros positivos
-
-
+LOOP:
+leaw $0, %A
+movw (%A), %D
+leaw $1, %A
+subw %D, (%A), %D
+leaw $0, %A
+movw %D, (%A)
+leaw $3, %A
+movw (%A), %D
+incw %D
+movw %D, (%A)
+leaw $0, %A
+movw (%A), %D
+leaw $ELSE, %A
+jle %D
+nop
+leaw $LOOP, %A
+jmp
+nop
+ELSE:
+leaw $ELSE2, %A
+je %D
+nop
+leaw $3, %A
+movw (%A), %D
+leaw $1, %A
+subw %D, %A, %D
+leaw $2, %A
+movw %D, (%A)
+leaw $END, %A
+jmp
+nop
+ELSE2:
+leaw $3, %A
+movw (%A), %D
+leaw $2, %A
+movw %D, (%A)
+leaw $END, %A
+jmp
+nop
+END:
 
 
 
