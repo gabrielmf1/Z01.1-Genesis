@@ -60,7 +60,8 @@ addw $1, %D, (%A) ;aumentado contador de rams
 
 leaw $0, %A
 movw (%A), %D
-addw $1, %D, (%A);aumentando o tamanho da string
+incw %D 
+movw %D, (%A) ;aumentando o tamanho da string
 
 movw %D, %A
 leaw $LOOP, %A
