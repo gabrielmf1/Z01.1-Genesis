@@ -56,13 +56,11 @@ nop
 
 leaw $1, %A
 movw (%A), %D
-addw $1, %D, %D
-movw %D, (%A) ;aumentado contador de rams
+addw $1, %D, (%A) ;aumentado contador de rams
 
 leaw $0, %A
 movw (%A), %D
-addw $1, %D, %D 
-movw %D, (%A)  ;aumentando o tamanho da string
+addw $1, %D, (%A);aumentando o tamanho da string
 
 movw %D, %A
 leaw $LOOP, %A
