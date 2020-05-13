@@ -25,7 +25,7 @@ R-LCD.nasm 0 4000
 #pow.nasm 2 10000
 #factorial.nasm 2 10000
 #stringLength.nasm 2 2000
-#SWeLED.nasm 1 1000
+SWeLED.nasm 1 1000
 #LCDlinha.nasm 0 10000
 #LCDquadrado.nasm 0 10000
 #LCDletraGrupo.nasm 0 10000
@@ -37,3 +37,15 @@ R-LCD.nasm 0 4000
 #isEven.nasm 2 1000
 #palindromo.nasm 2 1000
 #LCDnomeGrupo.nasm 0 10000
+<<<<<<< HEAD
+=======
+
+###########################
+## conceito A
+###########################
+
+vectorMean.nasm  2000
+SWeLED2.nasm 1 1000
+
+
+>>>>>>> upstream/master
