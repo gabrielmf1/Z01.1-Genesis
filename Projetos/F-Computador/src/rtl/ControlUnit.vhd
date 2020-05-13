@@ -34,6 +34,7 @@ begin
   loadM <= instruction(17) and instruction(5);
   loadA <= not(instruction(17));
   muxALUI_A <= not(instruction(17));
+  zx <= instruction(12) when instruction(17) = '1' else '0';
 
 
 
