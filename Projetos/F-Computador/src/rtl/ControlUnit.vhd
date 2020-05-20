@@ -40,6 +40,8 @@ begin
   ny <= instruction(9) when instruction(17) = '1' else '0';
   f <= instruction(8) when instruction(17) = '1' else '0';
   no <= instruction(7) when instruction(17) = '1' else '0';
+  --loadPC <= not(instruction(13)) and instruction(12) and not(instruction(11)) and instruction(10) and not(instruction())
+  
    
 
 
