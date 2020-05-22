@@ -16,7 +16,7 @@ R-LCD.nasm 0 4000
 #abs.nasm 2 1000
 <<<<<<< HEAD
 #max.nasm 2 10000
-#mult.nasm 1 10000
+mult.nasm 1 10000
 =======
 #isEven.nasm 2 1000
 #mult.nasm 1 10000
