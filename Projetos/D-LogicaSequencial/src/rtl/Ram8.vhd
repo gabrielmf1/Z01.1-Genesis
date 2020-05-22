@@ -58,19 +58,19 @@ architecture arch of ram8 is
 	end component;
 	
 	signal o0, o1, o2, o3, o4, o5, o6, o7: STD_LOGIC;
-	signal out_regis0, out_regis1, out_regis2, out_regis3, out_regis4, out_regis5, out_regis6, out_regis7: STD_LOGIC_VECTOR(15 downto 0);
+	signal regis0, regis1, regis2, regis3, regis4, regis5, regis6, regis7: STD_LOGIC_VECTOR(15 downto 0);
 	
 begin
 
   dmux: DMux8Way port map(load, address, o0, o1, o2, o3, o4, o5, o6, o7);
-  regsiter0: Register16 port map(clock, input(15 downto 0), o0, out_regis0(15 downto 0));
-  regsiter1: Register16 port map(clock, input(15 downto 0), o1, out_regis1(15 downto 0));
-  regsiter2: Register16 port map(clock, input(15 downto 0), o2, out_regis2(15 downto 0));
-  regsiter3: Register16 port map(clock, input(15 downto 0), o3, out_regis3(15 downto 0));
-  regsiter4: Register16 port map(clock, input(15 downto 0), o4, out_regis4(15 downto 0));
-  regsiter5: Register16 port map(clock, input(15 downto 0), o5, out_regis5(15 downto 0));
-  regsiter6: Register16 port map(clock, input(15 downto 0), o6, out_regis6(15 downto 0));
-  regsiter7: Register16 port map(clock, input(15 downto 0), o7, out_regis7(15 downto 0));
-  mux: Mux8Way16 port map(out_regis0, out_regis1, out_regis2, out_regis3, out_regis4, out_regis5, out_regis6, out_regis7,address,output);
+  regsiter0: Register16 port map(clock, input(15 downto 0), o0, regis0(15 downto 0));
+  regsiter1: Register16 port map(clock, input(15 downto 0), o1, regis1(15 downto 0));
+  regsiter2: Register16 port map(clock, input(15 downto 0), o2, regis2(15 downto 0));
+  regsiter3: Register16 port map(clock, input(15 downto 0), o3, regis3(15 downto 0));
+  regsiter4: Register16 port map(clock, input(15 downto 0), o4, regis4(15 downto 0));
+  regsiter5: Register16 port map(clock, input(15 downto 0), o5, regis5(15 downto 0));
+  regsiter6: Register16 port map(clock, input(15 downto 0), o6, regis6(15 downto 0));
+  regsiter7: Register16 port map(clock, input(15 downto 0), o7, regis7(15 downto 0));
+  mux: Mux8Way16 port map(regis0, regis1, regis2, regis3, regis4, regis5, regis6, regis7,address,output);
 	
 end architecture;
