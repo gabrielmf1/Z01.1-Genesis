@@ -35,6 +35,16 @@ begin
   loadA <= not(instruction(17));
   muxALUI_A <= not(instruction(17));
   zx <= instruction(12) when instruction(17) = '1' else '0';
+  nx <= instruction(11) when instruction(17) = '1' else '0';
+  zy <= instruction(10) when instruction(17) = '1' else '0';
+  ny <= instruction(9) when instruction(17) = '1' else '0';
+  f <= instruction(8) when instruction(17) = '1' else '0';
+  no <= instruction(7) when instruction(17) = '1' else '0';
+  muxAM <= instruction(5) when instruction(17) = '1' else '0';
+  loadPC<= instruction(17) and ((instruction(0) and (not(zr) and not(ng))) or (instruction(1) and zr) or 
+  (instruction(2) and (not(zr) and ng)));
+   
+
 
 
 
