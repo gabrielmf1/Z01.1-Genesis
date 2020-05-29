@@ -32,17 +32,22 @@ begin
   
   loadD <= instruction(17) and instruction(4);
   loadM <= instruction(17) and instruction(5);
-  loadA <= not(instruction(17));
+  loadA <= not(instruction(17)) or (instruction(17) and instruction(3));
   muxALUI_A <= not(instruction(17));
   zx <= instruction(12) when instruction(17) = '1' else '0';
   nx <= instruction(11) when instruction(17) = '1' else '0';
   zy <= instruction(10) when instruction(17) = '1' else '0';
   ny <= instruction(9) when instruction(17) = '1' else '0';
-  f <= instruction(8) when instruction(17) = '1' else '0';
+  f <= instruction(8) when instruction(17) = '1' else '0' ;
   no <= instruction(7) when instruction(17) = '1' else '0';
-  muxAM <= instruction(5) when instruction(17) = '1' else '0';
-  loadPC<= instruction(17) and ((instruction(0) and (not(zr) and not(ng))) or (instruction(1) and zr) or 
-  (instruction(2) and (not(zr) and ng)));
+  muxAM <= instruction(13) when instruction(17) = '1' else '0';
+--  loadPC<= instruction(17) and ((instruction(0) and (not(zr) and not(ng))) or
+--                                (instruction(1) and zr) or
+--                                (instruction(2) and (not(zr) and ng)) or
+--                                (instruction(2) and instruction(0) and (not zr)) );
+
+  loadPC <= ((instruction(0) and ((not ng) and (not zr))) or (instruction(1) and zr) or (instruction(2) and ng)) and instruction(17);
+
    
 
 
