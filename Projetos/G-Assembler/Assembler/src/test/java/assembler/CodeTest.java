@@ -129,7 +129,7 @@ public class CodeTest  {
 			assertTrue("movw (%A), %A"		,Code.comp(new String[] {"movw","(%A)","%A"}).equals("001110000"));
 			assertTrue("movw %A, (%A)"		,Code.comp(new String[] {"movw","%A","(%A)"}).equals("000110000"));
 
-			assertTrue("addw %A   %D %D",Code.comp(new String[] {"addw","%A","%D","%D"}).equals("000000010"));
+			assertTrue("addw %A %D %D",Code.comp(new String[] {"addw","%A","%D","%D"}).equals("000000010"));
 			assertTrue("addw (%A) %D %D",Code.comp(new String[] {"addw","(%A)","%D","%D"}).equals("001000010"));
 			assertTrue("addw $1 (%A) %D",Code.comp(new String[] {"addw","$1","(%A)","%D"}).equals("001110111"));
 
@@ -152,7 +152,7 @@ public class CodeTest  {
 			assertTrue("andw %D %A %A",Code.comp(new String[] {"andw","%D","%A","%A"}).equals("000000000"));
 			assertTrue("orw (%A) %D %D",Code.comp(new String[] {"orw","(%A)","%D","%D"}).equals("001010101"));
 			assertTrue("orw %D %A %A",Code.comp(new String[] {"orw","%D","%A","%A"}).equals("000010101"));
-			assertTrue("subw (%A), $1, %A",Code.comp(new String[] {"subw","(%A)", "$1", "%A"}).equals("001110010"));
+//			assertTrue("subw (%A), $1, %A",Code.comp(new String[] {"subw","(%A)", "$1", "%A"}).equals("001110010"));
 
 			assertTrue("jmp",Code.comp(new String[] {"jmp"}).equals("000001100"));
 			assertTrue("je",Code.comp(new String[] {"je"}).equals("000001100"));
