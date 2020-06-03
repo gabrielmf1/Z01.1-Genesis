@@ -133,13 +133,35 @@ public class Parser {
      * @param  command instrução a ser analisada.
      * @return um vetor de string contento os tokens da instrução (as partes do comando).
      */
+//    public String[] instruction(String command) {
+//        if (commandType(command) == CommandType.C_COMMAND) {
+//            String[] split = command.replaceAll(",", " ").split(" ");
+//            return split;
+//        }else{
+//            return null;
+//        }
+//    }
     public String[] instruction(String command) {
-        if (commandType(command) == CommandType.C_COMMAND) {
-            String[] split = command.replaceAll(",", " ").split(" ");
-            return split;
-        }else{
-            return null;
+        /* TODO: implementar */
+        try{
+            command = command.replace(" ", ";");
+        }catch(Exception e){
+            e.printStackTrace();
         }
+        try{
+            command = command.replace(",", ";");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        try{
+            command = command.replace(";;", ";");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        String[] instruction = command.split(";");
+
+        return instruction;
     }
 
 
