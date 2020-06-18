@@ -10,7 +10,8 @@
 # conceito C
 ##########################
 
-add.nasm 1 1000
+
+#add.nasm 1 1000
 #sub.nasm 1 1000
 #mov.nasm 1 1000
 #abs.nasm 2 1000
@@ -37,15 +38,14 @@ add.nasm 1 1000
 #isEven.nasm 2 1000
 #palindromo.nasm 2 1000
 #LCDnomeGrupo.nasm 0 10000
-<<<<<<< HEAD
+
 =======
 
 ###########################
 ## conceito A
 ###########################
 
-#vectorMean.nasm  2000
-#SWeLED2.nasm 1 1000
+vectorMean.nasm 2 2000
+SWeLED2.nasm 1 1000
 
 
->>>>>>> upstream/master
