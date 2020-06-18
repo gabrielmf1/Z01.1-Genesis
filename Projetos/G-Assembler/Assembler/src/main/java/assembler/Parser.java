@@ -89,7 +89,14 @@ public class Parser {
      */
     public CommandType commandType(String command) {
         /* TODO: implementar */
-    	return null;
+        if (command.contains("leaw")){
+            return CommandType.A_COMMAND;
+        }
+        else if (command.contains(":")){
+            return CommandType.L_COMMAND;
+        } else{
+            return CommandType.C_COMMAND;
+        }
     }
 
     /**
@@ -99,8 +106,15 @@ public class Parser {
      * @return somente o símbolo ou o valor número da instrução.
      */
     public String symbol(String command) {
-        /* TODO: implementar */
-    	return null;
+        if (commandType(command)== CommandType.A_COMMAND){
+            int comeco = command.indexOf("$");
+            int fim = command.indexOf(",");
+            String dois = command.substring(comeco+1,fim);
+            return dois;
+        }else{
+            return null;
+        }
+
     }
 
     /**
@@ -110,8 +124,7 @@ public class Parser {
      * @return o símbolo da instrução (sem os dois pontos).
      */
     public String label(String command) {
-        /* TODO: implementar */
-    	return null;
+        return command.replaceAll(":", "");
     }
 
     /**
@@ -120,9 +133,35 @@ public class Parser {
      * @param  command instrução a ser analisada.
      * @return um vetor de string contento os tokens da instrução (as partes do comando).
      */
+//    public String[] instruction(String command) {
+//        if (commandType(command) == CommandType.C_COMMAND) {
+//            String[] split = command.replaceAll(",", " ").split(" ");
+//            return split;
+//        }else{
+//            return null;
+//        }
+//    }
     public String[] instruction(String command) {
         /* TODO: implementar */
-    	return null;
+        try{
+            command = command.replace(" ", ";");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        try{
+            command = command.replace(",", ";");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        try{
+            command = command.replace(";;", ";");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        String[] instruction = command.split(";");
+
+        return instruction;
     }
 
 

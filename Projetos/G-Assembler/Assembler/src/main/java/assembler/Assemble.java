@@ -20,6 +20,7 @@ public class Assemble {
     private PrintWriter outHACK = null;    // grava saida do código de máquina em Hack
     boolean debug;                         // flag que especifica se mensagens de debug são impressas
     private SymbolTable table;             // tabela de símbolos (variáveis e marcadores)
+    private Code code;
 
     /*
      * inicializa assembler
@@ -34,7 +35,8 @@ public class Assemble {
         hackFile   = new File(outFileHack);                      // Cria arquivo de saída .hack
         outHACK    = new PrintWriter(new FileWriter(hackFile));  // Cria saída do print para
                                                                  // o arquivo hackfile
-        table      = new SymbolTable();                          // Cria e inicializa a tabela de simbolos
+        table      = new SymbolTable(); // Cria e inicializa a tabela de simbolos
+        code = new Code();
     }
 
     /**
@@ -55,11 +57,11 @@ public class Assemble {
         while (parser.advance()){
             if (parser.commandType(parser.command()) == Parser.CommandType.L_COMMAND) {
                 String label = parser.label(parser.command());
-                /* TODO: implementar */
-                // deve verificar se tal label já existe na tabela,
-                // se não, deve inserir. Caso contrário, ignorar.
-            }
-            romAddress++;
+                if(table.contains(label) == Boolean.FALSE){
+                    table.addEntry(label,romAddress);
+                }
+            }else {romAddress++;}
+
         }
         parser.close();
 
@@ -78,6 +80,10 @@ public class Assemble {
                     // deve verificar se tal símbolo já existe na tabela,
                     // se não, deve inserir associando um endereço de
                     // memória RAM a ele.
+                    if(table.contains(symbol) == Boolean.FALSE){
+                        table.addEntry(symbol,ramAddress);
+                        ramAddress ++;
+                    }
                 }
             }
         }
@@ -95,6 +101,7 @@ public class Assemble {
     public void generateMachineCode() throws FileNotFoundException, IOException{
         Parser parser = new Parser(inputFile);  // abre o arquivo e aponta para o começo
         String instruction  = "";
+        SymbolTable symbol = new SymbolTable();
 
         /**
          * Aqui devemos varrer o código nasm linha a linha
@@ -105,20 +112,43 @@ public class Assemble {
         while (parser.advance()){
             switch (parser.commandType(parser.command())){
                 /* TODO: implementar */
+
                 case C_COMMAND:
-                break;
-            case A_COMMAND:
-                break;
-            default:
-                continue;
+
+                    String[] linha = parser.instruction(parser.command());
+                    instruction = "10" + Code.comp(linha) + Code.dest(linha) + Code.jump(linha);
+                    System.out.println(Code.dest(linha));
+
+                    break;
+                case A_COMMAND:
+
+                    boolean teste = Boolean.TRUE;
+                    String simbolo = parser.symbol(parser.command());
+
+                    try {
+                        Double num = Double.parseDouble(simbolo);
+                    } catch (NumberFormatException e) {
+                        teste = false;
+                    }
+                    if(teste) {
+                        instruction = "00" + Code.toBinary(parser.symbol(parser.command()));
+                    } else {
+                        instruction = "00" +  Code.toBinary((table.getAddress(simbolo).toString()));
+
+                    }
+                    break;
+                default:
+                    continue;
             }
             // Escreve no arquivo .hack a instrução
-            if(outHACK!=null) {
-                outHACK.println(instruction);
-            }
+            //if(outHACK!=null) {
+            outHACK.println(instruction);
+            //}
             instruction = null;
+            symbol = null;
         }
     }
+
 
     /**
      * Fecha arquivo de escrita
